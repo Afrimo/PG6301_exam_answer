@@ -17,13 +17,29 @@ export function TaskApi(db){
         res.json(movies)
     })
 
-    api.post("/", (req, res) => {
-        const {title, year, plot} = req.body;
+    api.post("/update-hours", async (req, res) => {
+        const { taskIndex, newHours } = req.body;
 
-        db.collection("tasks").insertOne({ description, hours })
+        try {
+            const collection = db.collection("tasks");
+            const taskToUpdate = await collection.findOne({}); // Find the task to update
 
-        res.sendStatus(284)
-    })
+            if (!taskToUpdate) {
+                return res.status(404).json({ message: "Task not found." });
+            }
+
+            // Update the task's hours field
+            await collection.updateOne(
+                { _id: taskToUpdate._id },
+                { $set: { hours: newHours } }
+            );
+
+            res.sendStatus(200);
+        } catch (error) {
+            console.error("Error updating task hours:", error);
+            res.status(500).json({ message: "Internal server error." });
+        }
+    });
 
     return api;
 }

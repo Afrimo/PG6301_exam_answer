@@ -24,7 +24,8 @@ export function LoggingFunction(){
         }));
     };
 
-    const addHoursToTask = (taskIndex) => {
+    const addHoursToTask = async (taskIndex) => {
+
         const inputValue = additionalHoursMap[taskIndex] || "";
         const totalHoursBefore = parseFloat(data[taskIndex].hours);
 
@@ -40,9 +41,28 @@ export function LoggingFunction(){
             newData[taskIndex].hours = newHours;
             setTaskData(newData);
 
+            try {
+                const response = await fetch("/api/tasks/update-hours", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        taskIndex: taskIndex,
+                        newHours: newHours,
+                    }),
+                });
+
+                if (!response.ok) {
+                    console.error("Error sending data to backend:", response.status);
+                }
+            } catch (error) {
+                console.error("Error sending data to backend:", error);
+            }
+
             setAdditionalHoursMap((prevMap) => ({
                 ...prevMap,
-                [taskIndex]: ""
+                [taskIndex]: "",
             }));
         }
     };
