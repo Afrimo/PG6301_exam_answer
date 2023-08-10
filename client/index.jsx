@@ -62,7 +62,7 @@ function useLoader(loadingFunction){
 }
 function ListMovies (){
     const { loading, error, data } = useLoader( async () => {
-        return fetchJSON("/api/movies")
+        return fetchJSON("/api/tasks")
     })
 
     if (loading){
@@ -80,13 +80,12 @@ function ListMovies (){
 
     return (
         <div>
-            <h1>Movies to come back to</h1>
+            <h1>Active tasks</h1>
             {
-                data.map( (movie) => (
-                    <div key={movie.title}><h1> {movie.title} -> ({movie.year}) </h1>
-                        <div>
-                            {movie.plot}
-                        </div>
+                data.map( (tasks) => (
+                    <div key={tasks.description}>
+                        <h2> {tasks.description}  </h2>
+                        <p>Hours used: {tasks.hours}</p>
                     </div>
                 ))}
         </div>

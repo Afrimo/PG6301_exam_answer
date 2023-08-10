@@ -5,13 +5,13 @@ export function MoviesApi(db){
 
     api.get("/", async (req, res) =>{
 
-        const collection = db.collection("movies")
+        const collection = db.collection("tasks")
         console.log(collection.title)
 
         const movies = await db
-            .collection("movies")
+            .collection("tasks")
             .find({})
-            .map(({ title, year, plot }) => ({ title, year, plot }))
+            .map(({ description, hours }) => ({ description, hours }))
             .toArray();
 
         res.json(movies)
@@ -20,7 +20,7 @@ export function MoviesApi(db){
     api.post("/", (req, res) => {
         const {title, year, plot} = req.body;
 
-        db.collection("movies").insertOne({ title, year, plot })
+        db.collection("tasks").insertOne({ description, hours })
 
         res.sendStatus(284)
     })

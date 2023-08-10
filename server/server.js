@@ -17,13 +17,11 @@ if (mongodburl){
 
     client.
     connect()
-        .then((conn) => app.use("/api/movies",
-            MoviesApi(conn.db(process.env.MONGODB_DATABASE || "movies-example"))));
+        .then((conn) => app.use("/api/tasks",
+            MoviesApi(conn.db(process.env.MONGODB_DATABASE || "company-tasks"))));
 }
 
 app.use(express.static("../client/dist"));
-
-//app.use("/api/movies", MoviesApi)
 
 app.use((req, res, next) => {
     if(req.method === "GET" && !req.path.startsWith("/api")){
@@ -33,5 +31,5 @@ app.use((req, res, next) => {
     }
 });
 
-const server = app.listen(process.env.PORT || 2000,
+const server = app.listen(process.env.PORT || 4000,
     () => {console.log(`Server started on: http://localhost:${server.address().port}`)});
