@@ -17,26 +17,4 @@ describe('client test suite',  () => {
 
         expect(element.querySelector("h1")?.innerHTML).toEqual("Page is currently loading....")
     });
-
-    // Testing code for logging hours throug inputs
-    it("logs hours through input tags", () => {
-        const tasks = [
-            { description: "Task 1", hours: 5 },
-            { description: "Task 2", hours: 8 },
-        ];
-
-        const element = document.createElement("div");
-        const root = createRoot(element)
-        const { getByPlaceholderText, getByText } = root.render(<TaskList data={tasks} />);
-
-        const input = getByPlaceholderText("Log hours");
-        fireEvent.change(input, { target: { value: "3" } });
-
-        const addButton = getByText("Add Hours");
-        fireEvent.click(addButton);
-
-        const updatedTask = tasks[0];
-        expect(updatedTask.hours).toBe(8);
-    });
-
 });

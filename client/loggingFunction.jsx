@@ -37,6 +37,12 @@ export function LoggingFunction(){
                 return;
             }
 
+            if (newHours < 0) {
+                alert("Cannot add under 0 hours.");
+                return;
+            }
+
+
             const newData = [...data];
             newData[taskIndex].hours = newHours;
             setTaskData(newData);
