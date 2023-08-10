@@ -11,7 +11,7 @@ const root = createRoot(element);
 
 export function HomePage(){
     return(
-        <div>
+        <form>
             <h1> Welcome back! </h1>
             <ul>
                 <li>
@@ -21,7 +21,7 @@ export function HomePage(){
                     <Link to={"/tasks/new"}> Log hours </Link>
                 </li>
             </ul>
-        </div>
+        </form>
     )
 }
 

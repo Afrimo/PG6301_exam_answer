@@ -1,13 +1,12 @@
 import * as React from "react";
 import {createRoot} from "react-dom/client";
-import {TaskList} from "../taskList.jsx";
 import {act} from "react-dom/test-utils";
+
+import {TaskList} from "../taskList.jsx";
 
 describe('client test suite',  () => {
 
-    it('HomePage gets rendered',  () => {
-
-        // Test code goes here
+    it('TaskList gets rendered',  () => {
         const element = document.createElement("div");
         const root = createRoot(element)
 
@@ -17,4 +16,6 @@ describe('client test suite',  () => {
 
         expect(element.querySelector("h1")?.innerHTML).toEqual("Page is currently loading....")
     });
+
+
 });
