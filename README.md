@@ -5,14 +5,14 @@
 * [x] Homepage with React
 * [x] 2 React pages with React-Router
 * [x] navigate back button
-* [ ] State with a trigger
+* [x] State with a trigger
 
 ####
 * T1
 * [x] Display activities from backend
 * [ ] Display number of logged hours
 * [ ] Log hours on tasks
-* [ ] basic test data from developer mode
+* [x] basic test data from developer mode
 
 ### Instructions
 * running code: - _npm run dev_
