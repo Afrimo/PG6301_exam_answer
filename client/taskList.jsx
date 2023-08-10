@@ -47,7 +47,9 @@ export function TaskList() {
     };
 
     if (loading){
-        return <div>Still loading...</div>
+        return <div>
+            <h1>Page is currently loading....</h1>
+        </div>
     }
 
     if (error){

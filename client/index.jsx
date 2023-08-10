@@ -9,7 +9,7 @@ const element = document.getElementById("app");
 const root = createRoot(element);
 
 
-function HomePage(){
+export function HomePage(){
     return(
         <div>
             <h1> Welcome back! </h1>
