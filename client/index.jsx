@@ -1,96 +1,12 @@
 import * as React from "react";
 import { createRoot } from "react-dom";
 import {BrowserRouter, Routes, Route, Link, useNavigate} from "react-router-dom";
-import {useEffect, useState} from "react";
+import {useState} from "react";
+import {TaskList} from "./taskList.jsx";
 
 const element = document.getElementById("app");
 const root = createRoot(element);
 
-function FrontPage() {
-    return(
-        <div>
-            <h1> Back to the movies </h1>
-            <ul>
-                <li>
-                    <Link to={"/movies/list"}> List Movies </Link>
-                </li>
-                <li>
-                    <Link to={"/movies/new"}> Add new Movie </Link>
-                </li>
-            </ul>
-        </div>
-    );
-}
-
-async function fetchJSON(url, options = {}){
-    const res = await fetch(url, {
-        method: options.method || "get",
-        headers: options.json ? {"content-type" : "application/json"} : {},
-        body: options.json && JSON.stringify(options.json),
-    });
-
-    if (!res.ok){
-        throw new Error(`Loading failed: ${res.status} -> ${res.statusText}`)
-    }
-
-    if (res.status === 200){
-        return await res.json();
-    }
-
-}
-function useLoader(loadingFunction){
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState();
-    const [data, setData] = useState();
-
-    async function load(){
-        try {
-            setLoading(true)
-            setData(await loadingFunction())
-        }
-        catch (error){
-            setError(error)
-            setLoading(false)
-        }
-        finally {
-            setLoading(false)
-        }
-    }
-
-    useEffect( () => load(), []);
-    return { loading, error, data }
-}
-function ListMovies (){
-    const { loading, error, data } = useLoader( async () => {
-        return fetchJSON("/api/tasks")
-    })
-
-    if (loading){
-        return <div>Still loading...</div>
-    }
-
-    if (error){
-        return (
-            <div>
-                <h1>Error</h1>
-                <div>{error.toString()}</div>
-            </div>
-        )
-    }
-
-    return (
-        <div>
-            <h1>Active tasks</h1>
-            {
-                data.map( (tasks) => (
-                    <div key={tasks.description}>
-                        <h2> {tasks.description}  </h2>
-                        <p>Hours used: {tasks.hours}</p>
-                    </div>
-                ))}
-        </div>
-    )
-}
 
 
 function AddMovie(){
@@ -115,6 +31,7 @@ function AddMovie(){
 
     return (
         <form onSubmit={handleSubmit}>
+            <Link to={"/"}>Back</Link>
             <h1>Submit a new movie</h1>
             <div>
                 Title:
@@ -132,27 +49,42 @@ function AddMovie(){
         </form>
     )
 }
-function Movies(){
+function HomePage(){
+    return(
+        <div>
+            <h1> Welcome back! </h1>
+            <ul>
+                <li>
+                    <Link to={"/tasks/list"}> Active tasks </Link>
+                </li>
+                <li>
+                    <Link to={"/tasks/new"}> Add new Movie </Link>
+                </li>
+            </ul>
+        </div>
+    )
+}
+
+
+
+function Tasks(){
     return(
         <Routes>
-            <Route path={"/list"} element={<ListMovies />} />
+            <Route path={"/list"} element={<TaskList />} />
             <Route path={"/new"} element={<AddMovie />} />
         </Routes>
     );
 }
-
-
 function Application() {
-    return(
+    return (
         <BrowserRouter>
             <Routes>
-                <Route path={"/"} element={<FrontPage />} />
-                <Route path={"/movies/*"} element={<Movies />}/>
+                <Route path={"/"} element={<HomePage/>}/>
+                <Route path={"/tasks/*"} element={<Tasks/>}/>
             </Routes>
         </BrowserRouter>
-    );
-}
+    )
+};
 
-//root.render(<h1> Greetings from React </h1>);
 
 root.render(<Application />)
