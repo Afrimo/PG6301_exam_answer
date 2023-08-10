@@ -1,6 +1,6 @@
 import express from "express";
 import * as path from "path";
-import {MoviesApi} from "./moviesApi.js";
+import {TaskApi} from "./taskApi.js";
 import bodyParser from "body-parser";
 import { MongoClient } from "mongodb";
 import dotenv from "dotenv"
@@ -18,7 +18,7 @@ if (mongodburl){
     client.
     connect()
         .then((conn) => app.use("/api/tasks",
-            MoviesApi(conn.db(process.env.MONGODB_DATABASE || "company-tasks"))));
+            TaskApi(conn.db(process.env.MONGODB_DATABASE || "company-tasks"))));
 }
 
 app.use(express.static("../client/dist"));

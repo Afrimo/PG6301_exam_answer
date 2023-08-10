@@ -1,6 +1,6 @@
 import express from "express";
 
-export function MoviesApi(db){
+export function TaskApi(db){
     const api = express.Router();
 
     api.get("/", async (req, res) =>{
