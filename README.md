@@ -2,9 +2,9 @@
 
 ## Tasks.
 * R1
-* [ ] Homepage with React
-* [ ] 2 React pages with React-Router
-* [ ] navigate back button
+* [x] Homepage with React
+* [x] 2 React pages with React-Router
+* [x] navigate back button
 * [ ] State with a trigger
 
 ####

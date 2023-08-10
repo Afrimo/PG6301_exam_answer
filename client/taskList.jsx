@@ -1,5 +1,6 @@
 import {Link} from "react-router-dom";
 import * as React from "react";
+import {useState} from "react";
 
 import { useLoader } from "./useLoader.jsx";
 import { fetchJSON } from "./fetchJSON.jsx";
@@ -33,6 +34,7 @@ export function TaskList (){
                         <p>Hours used: {tasks.hours}</p>
                     </div>
                 ))}
+            <Link to={"/tasks/new"}>Log hours</Link>
         </div>
     )
 }

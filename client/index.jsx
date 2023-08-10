@@ -2,7 +2,9 @@ import * as React from "react";
 import { createRoot } from "react-dom";
 import {BrowserRouter, Routes, Route, Link, useNavigate} from "react-router-dom";
 import {useState} from "react";
+
 import {TaskList} from "./taskList.jsx";
+import {fetchJSON} from "./fetchJSON.jsx";
 
 const element = document.getElementById("app");
 const root = createRoot(element);
@@ -10,9 +12,8 @@ const root = createRoot(element);
 
 
 function AddMovie(){
-    const [title, setTitle] = useState("")
-    const [year, setYear] = useState("")
-    const [plot, setPlot] = useState("")
+    const [description, setDescription] = useState("")
+    const [hours, setHours] = useState("")
     const navigate = useNavigate()
 
     async function handleSubmit(e){
@@ -20,12 +21,11 @@ function AddMovie(){
 
         await fetchJSON("/api/movies", {
             method: "post",
-            json: { title, year, plot }
+            json: { description, hours }
         })
 
-        setTitle("")
-        setYear("")
-        setPlot("")
+        setHours("")
+        setDescription("")
         navigate("/")
     }
 
@@ -35,17 +35,19 @@ function AddMovie(){
             <h1>Submit a new movie</h1>
             <div>
                 Title:
-                <input value={title} onChange={(e) => setTitle(e.target.value)} />
+                <input />
             </div>
             <div>
                 Year:
-                <input value={year} onChange={(e) => setYear(e.target.value)} />
+                <input />
             </div>
             <div>
                 Plot:
-                <textarea value={plot} onChange={(e) => setPlot(e.target.value)} />
+                <textarea />
             </div>
-            <button>Submit</button>
+            <div>
+                <Link to={"/tasks/list"}>All tasks</Link>
+            </div>
         </form>
     )
 }
