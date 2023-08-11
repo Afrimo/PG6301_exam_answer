@@ -5,6 +5,7 @@
 * building code: - _npm run build_
 * running test code: - _npm run test_
 * collecting test coverage: - _npm run verify_
+* NB: when running _npm run verify_ , MongoDB needs to be active and the current ip address needs to be updated to make the server tests pass.
 
 ### Tasks. - Completed & failed
 * R1
