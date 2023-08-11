@@ -42,7 +42,6 @@ export function LoggingFunction(){
                 return;
             }
 
-
             const newData = [...data];
             newData[taskIndex].hours = newHours;
             setTaskData(newData);
@@ -90,7 +89,7 @@ export function LoggingFunction(){
     const totalHours = data.reduce((total, task) => total + parseFloat(task.hours), 0);
 
     return (
-        <div>
+        <form>
             <Link to={"/"}>Back</Link>
             <h1>Log your hours on each task</h1>
             {data.map((task, index) => (
@@ -115,6 +114,6 @@ export function LoggingFunction(){
             ))}
             <p>Total Hours: {totalHours}</p>
             <Link to={"/tasks/list"}>All tasks</Link>
-        </div>
+        </form>
     )
 }

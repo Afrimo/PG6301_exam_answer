@@ -1,21 +1,17 @@
 import * as React from "react";
-import {createRoot} from "react-dom/client";
+import { createRoot } from "react-dom/client";
 import {act} from "react-dom/test-utils";
 
-import {TaskList} from "../taskList.jsx";
+import {HomePage} from "../homePage.jsx";
 
-describe('client test suite',  () => {
-
-    it('TaskList gets rendered',  () => {
-        const element = document.createElement("div");
+describe('client test suite', () => {
+    it('HomePage gets rendered', () => {
+        const element = document.createElement("div")
         const root = createRoot(element)
 
-        act( () => {
-            root.render(<TaskList />)
-        })
 
-        expect(element.querySelector("h1")?.innerHTML).toEqual("Page is currently loading....")
+        root.render(<HomePage />)
+
+        expect(element.innerHTML).toMatchSnapshot();
     });
-
-
 });

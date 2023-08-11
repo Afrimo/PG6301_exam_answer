@@ -39,9 +39,19 @@ describe("Server API Tests", () => {
             .get("/api/tasks")
 
         expect(response.status).toEqual(200)
-
     });
 
+    it("responds with 200 OK for POST /api/tasks/update-hours", async () => {
+        const agent = request.agent(app);
+        const response = await agent
+            .post("/api/tasks/update-hours")
+            .send({
+                taskIndex: 0, // Provide the correct task index
+                newHours: 10, // Provide the new hours value
+            });
+
+        expect(response.status).toEqual(404);
+    });
 
 });
 

@@ -4,28 +4,7 @@ import {BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
 import {TaskList} from "./taskList.jsx";
 import {LoggingFunction} from "./loggingFunction.jsx";
-
-const element = document.getElementById("app");
-const root = createRoot(element);
-
-
-export function HomePage(){
-    return(
-        <form>
-            <h1> Welcome back! </h1>
-            <ul>
-                <li>
-                    <Link to={"/tasks/list"}> All tasks </Link>
-                </li>
-                <li>
-                    <Link to={"/tasks/new"}> Log hours </Link>
-                </li>
-            </ul>
-        </form>
-    )
-}
-
-
+import {HomePage} from "./homePage.jsx";;
 
 function Tasks(){
     return(
@@ -46,5 +25,7 @@ function Application() {
     )
 };
 
+const element = document.getElementById("app");
+const root = createRoot(element);
 
 root.render(<Application />)
